@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Jenkins on AWS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at top left, #172554, transparent 45%),
+                radial-gradient(circle at bottom right, #312e81, transparent 45%),
+                #080b16;
+        }
+
+        /* Animated background glow */
+        .glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #00e5ff;
+            filter: blur(140px);
+            opacity: 0.17;
+            border-radius: 50%;
+            animation: moveGlow 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveGlow {
+            from {
+                transform: translate(-200px, -100px);
+            }
+            to {
+                transform: translate(200px, 100px);
+            }
+        }
+
+        /* Main welcome card */
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 750px;
+            padding: 55px 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 229, 255, 0.35);
+            border-radius: 24px;
+            background: rgba(17, 24, 45, 0.78);
+            box-shadow:
+                0 0 35px rgba(0, 229, 255, 0.12),
+                inset 0 0 25px rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            animation: appear 1.3s ease-out;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(35px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 9px 16px;
+            margin-bottom: 28px;
+            border: 1px solid #00e5ff;
+            border-radius: 30px;
+            color: #00e5ff;
+            font-size: 12px;
+            letter-spacing: 3px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 5px #00e5ff;
+            }
+            50% {
+                box-shadow: 0 0 20px #00e5ff;
+            }
+        }
+
+        h1 {
+            font-size: clamp(36px, 7vw, 64px);
+            margin-bottom: 18px;
+            background: linear-gradient(
+                90deg, #ffffff, #00e5ff, #a78bfa, #ffffff
+            );
+            background-size: 250% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: gradient 5s linear infinite;
+        }
+
+        @keyframes gradient {
+            to {
+                background-position: 250% center;
+            }
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: #00e5ff;
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #86efac;
+            font-size: 14px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 12px #4ade80;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        footer {
+            margin-top: 35px;
+            color: #64748b;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* Floating decorative particles */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #00e5ff;
+            opacity: 0.65;
+            animation: float 8s linear infinite;
+        }
+
+        .particle:nth-child(2) {
+            left: 15%;
+            top: 80%;
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3) {
+            left: 80%;
+            top: 20%;
+            animation-delay: -4s;
+        }
+
+        .particle:nth-child(4) {
+            left: 75%;
+            top: 85%;
+            animation-delay: -6s;
+        }
+
+        .particle:nth-child(5) {
+            left: 25%;
+            top: 15%;
+            animation-delay: -3s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-70px) scale(1.6);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            footer {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow"></div>
+
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <main class="container">
+        <div class="badge">AWS • DEVOPS • AUTOMATION</div>
+
+        <h1>Welcome!</h1>
+
+        <p class="subtitle">
+            Your application is running on
+            <span class="highlight">AWS</span><br>
+            and delivered through
+            <span class="highlight">Jenkins CI/CD</span>.
+            <br><br>
+            Automate. Deploy. Innovate.
+        </p>
+
+        <div class="status">
+            <span class="dot"></span>
+            Welcome Page Loaded Successfully
+        </div>
+
+        <footer>
+            POWERED BY AWS & JENKINS
+        </footer>
+    </main>
+</body>
+</html>
